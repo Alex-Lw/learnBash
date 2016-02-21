@@ -24,16 +24,20 @@ cd
 sudo xz -d lin*.tar.xz
 sudo tar -xvf lin*.tar
 sudo mv linux-2.6.32.70/ /usr/src/
-cd /usr/src/
+cd /usr/src/linux-2.6.32.70/
 
-# make config, you should wait for config
-sudo make mrproper
-sudo make menuconfig
+# copy config, you should wait for config
+sudo cp /boot/config-2.6.32-21-generic /usr/src/linux-2.6.32.70/arch/x86/configs/config-2.6.32.70_defconfig
 
-# make the kernel
-sudo make dep -j4
-sudo make clean -j4
-sudo make bzImage -j4
-sudo make modules -j4
-sudo make modules_install 
-sudo make install 
+# make and install the kernel
+sudo make config-2.6.32.70_defconfig
+sudo make -j4
+sudo make modules_install
+sudo make install
+sudo update-initramfs -c -k 2.6.32.70
+sudo update-grub
+#sudo make mrproper
+#sudo make menuconfig
+
+# reboot
+
