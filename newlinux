@@ -1,5 +1,4 @@
 #!/bin/sh
-if [ ];then
 # change the sources of ubuntu software, you are not suppose to go away
 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
 echo "deb http://mirrors.163.com/ubuntu/ lucid main universe restricted multiverse
@@ -24,13 +23,6 @@ sudo axel https://cdn.kernel.org/pub/linux/kernel/v2.6/longterm/v2.6.32/linux-2.
 cd 
 sudo xz -d lin*.tar.xz
 sudo tar -xvf lin*.tar
-fi
-
-
-
-if [ -d "/usr/src/linux-2.6.32.70" ]; then
-      sudo rm -rf /usr/src/linux-2.6.32.70
-fi
 sudo mv linux-2.6.32.70/ /usr/src/
 cd /usr/src/linux-2.6.32.70/
 
