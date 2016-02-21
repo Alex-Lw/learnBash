@@ -1,0 +1,39 @@
+#!/bin/sh
+# change the sources of ubuntu software, you are not suppose to go away
+sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
+echo "deb http://mirrors.163.com/ubuntu/ lucid main universe restricted multiverse
+deb-src http://mirrors.163.com/ubuntu/ lucid main universe restricted multiverse
+deb http://mirrors.163.com/ubuntu/ lucid-security universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ lucid-security universe main multiverse restricted
+deb http://mirrors.163.com/ubuntu/ lucid-updates universe main multiverse restricted
+deb http://mirrors.163.com/ubuntu/ lucid-proposed universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ lucid-proposed universe main multiverse restricted
+deb http://mirrors.163.com/ubuntu/ lucid-backports universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ lucid-backports universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ lucid-updates universe main multiverse restricted" > /etc/apt/sources.list
+sudo apt-get update
+
+# install the xz and ncurse and axel, you are not suppose to go away
+sudo apt-get install xz-utils
+sudo apt-get install libncurses*
+sudo apt-get install axel
+
+# download and unzip the linux kernel and move to /usr/src/
+sudo axel https://cdn.kernel.org/pub/linux/kernel/v2.6/longterm/v2.6.32/linux-2.6.32.70.tar.xz
+cd 
+sudo xz -d lin*.tar.xz
+sudo tar -xvf lin*.tar
+sudo mv linux-2.6.32.70/ /usr/src/
+cd /usr/src/
+
+# make config, you should wait for config
+sudo make mrproper
+sudo make menuconfig
+
+# make the kernel
+sudo make dep -j4
+sudo make clean -j4
+sudo make bzImage -j4
+sudo make modules -j4
+sudo make modules_install 
+sudo make install 
