@@ -1,0 +1,8 @@
+__author__ == Alex luo
+__date__ == 20160220
+
+Project Info:
+    name: bash learning project
+    func: it's used for learn the bash shell script, and it also contain my homework in operation course
+    Ho2U: "chmod -x script" and then run the script by ./script
+
