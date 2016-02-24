@@ -1,7 +1,7 @@
 #!/bin/sh
 # change the sources of ubuntu software, you are not suppose to go away
 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
-echo "deb http://mirrors.163.com/ubuntu/ lucid main universe restricted multiverse
+sudo echo "deb http://mirrors.163.com/ubuntu/ lucid main universe restricted multiverse
 deb-src http://mirrors.163.com/ubuntu/ lucid main universe restricted multiverse
 deb http://mirrors.163.com/ubuntu/ lucid-security universe main multiverse restricted
 deb-src http://mirrors.163.com/ubuntu/ lucid-security universe main multiverse restricted
@@ -19,7 +19,8 @@ sudo apt-get install libncurses*
 sudo apt-get install axel
 
 # download and unzip the linux kernel and move to /usr/src/
-if [ ! -f "linux-2.6.32.70.tar.xz"]; then
+cd 
+if [ ! -f "linux-2.6.32.70.tar.gz"]; then
     sudo axel https://cdn.kernel.org/pub/linux/kernel/v2.6/longterm/v2.6.32/linux-2.6.32.70.tar.xz
     cd 
     sudo xz -d lin*.tar.xz
@@ -30,8 +31,9 @@ fi
 if [ -d "/usr/src/linux-2.6.32.70" ]; then
       sudo rm -rf /usr/src/linux-2.6.32.70
 fi
-sudo mv linux-2.6.32.70/ /usr/src/
+sudo cp -r linux-2.6.32.70/ /usr/src/
 cd /usr/src/linux-2.6.32.70/
+sudo make clean
 
 # copy config, you should wait for config
 sudo cp /boot/config-2.6.32-21-generic /usr/src/linux-2.6.32.70/arch/x86/configs/config-2.6.32.70_defconfig
